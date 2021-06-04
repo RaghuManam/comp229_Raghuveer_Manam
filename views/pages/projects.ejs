@@ -1,0 +1,65 @@
+<%- include('../partials/head')-%>
+
+    <body>
+        <%- include('../partials/header')-%>
+            <main id="main">
+                <!-- ======= Portfolio Section ======= -->
+                <section id="portfolio" class="portfolio section-bg">
+                    <div class="container">
+
+                        <div class="section-title">
+                            <h2>Projects</h2>
+                            <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum
+                                quidem. Sit
+                                sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit
+                                alias
+                                ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+                        </div>
+
+                        <div class="row portfolio-container">
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                                <div class="portfolio-wrap">
+                                    <img src="img/portfolio/project1.png" class="img-fluid" alt="">
+                                    <h3>Reward System web application</h3>
+                                    <p>Redeem Time is a points collection system where customers earn points when
+                                        purchases are made. They can be used for movies and giftcards. I was involved in
+                                        the designing phase of the project. writing functional requirements and also use
+                                        case diagrams.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                                <div class="portfolio-wrap">
+                                    <img src="img/portfolio/project2.png" class="img-fluid" alt="">
+                                    <h3>Quiz me Application</h3>
+                                    <p>Quize me application write like this - it's an application designed for kids
+                                        under 5 years to test their math and vocabulary skills on a phone/ tablet. I was
+                                        involved in the UI design and tested the app for all its core functionality.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                                <div class="portfolio-wrap">
+                                    <img src="img/portfolio/project3.png" class="img-fluid" alt="">
+                                    <h3>Snake Game</h3>
+                                    <p>My role was to write code using python language. It is a game and my segment in
+                                        the project is to display the score of the game. For this I have used functions
+                                        and for and while loops and if-else statements.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section><!-- End Portfolio Section -->
+
+            </main>
+            <%- include('../partials/footer')-%>
+    </body>
+    <script>
+        window.onload = function () {
+            document.getElementById('projects').classList.add('active');
+        };
+    </script>
+
+    </html>
