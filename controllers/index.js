@@ -128,7 +128,7 @@ processRegisterPage = (req, res, next) => {
 
     User.register(newUser, req.body.password, (err) => {
         if (err) {
-            console.log("Error:", err?.message);
+            console.log("Error:", err.message);
         }
         else {
             //if no error exists then registration is successful
