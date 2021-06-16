@@ -56,9 +56,9 @@ router.get('/business', requireAuth, indexController.displayBusinessPage);
 router.post('/business/delete/(:id)', requireAuth, indexController.deleteBusiness);
 
 /* Get business edit page. */
-router.get('/business/edit/(:id)', requireAuth, indexController.displayEditBusinessPage);
+router.get('/business/edit/(:id)', indexController.displayEditBusinessPage);
 /* Post business edit page. */
-router.post('/business/edit/(:id)', requireAuth, indexController.processEditBusiness);
+router.post('/business/update/(:id)', indexController.processEditBusiness);
 
 
 

@@ -153,12 +153,14 @@ module.exports.displayEditBusinessPage = (req, res, next) => {
                 name: data[0].name,
                 title: data[0].title,
             }
-            res.render('pages/business_edit',
+            return res.render('pages/business_edit',
                 {
                     id: req.params.id,
-                    data: dataEdit,
-                    title: 'Express',
-                    displayName: req.user ? req.user.name : ''
+                    contact_number: data[0].contact_number,
+                    email: data[0].email,
+                    name: data[0].name,
+                    title: data[0].title,
+                    displayName: ''
                 });
 
         }
@@ -169,20 +171,16 @@ module.exports.displayEditBusinessPage = (req, res, next) => {
 
 /* GET business edit page.  */
 module.exports.processEditBusiness = (req, res, next) => {
-    Business.find({ _id: req.params.id }, (err, data) => {
+    Business.updateOne({
+        _id: req.params.id
+    }, req.body, function (err, user) {
         if (err) {
             console.log(err)
-        } else {
-            res.render('pages/business_edit',
-                {
-                    id: req.params.id,
-                    data: data[0],
-                    title: 'Express',
-                    displayName: req.user ? req.user.name : ''
-                });
         }
-    })
-
+        else {
+            return res.redirect('/business');
+        }
+    });
 }
 
 

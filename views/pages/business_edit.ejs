@@ -4,30 +4,27 @@
         <%- include('../partials/header')-%>
             <main id="main">
                 <!-- ======= Business Section ======= -->
-                <section id="business" class="business">
+                <section id="businessedit" class="businessedit">
                     <div class="container">
                         <h3 class="text-center text-uppercase">Business Contacts update</h3>
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6 bg-light border rounded py-3">
-                                <form action="/business/edit/<%= id %>" method="post">
-                                    <label>TITLE: </label><b>
-                                        <%= data.title %>
-                                    </b>
+                                <form action="/business/update/<%= id %>" method="post">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <input type="text" class="form-control" name="name" id="name"
-                                            value="<%= data.name %>" placeholder="Name" required>
+                                            value="<%= name %>" placeholder="Name" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control" name="email" id="email"
-                                            value="<%= data.email %>" placeholder="Email" required>
+                                            value="<%= email %>" placeholder="Email" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="contact_number">Contact Number</label>
                                         <input type="text" class="form-control" name="contact_number"
-                                            id="contact_number" value="<%= data.contact_number %>"
+                                            id="contact_number" value="<%= contact_number %>"
                                             placeholder="Contact Number" required>
                                     </div>
                                     <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="Submit"
