@@ -1,20 +1,128 @@
+let express = require('express');
+let router = express.Router();
+let mongoose = require('mongoose');
+let passport = require('passport');
+
+//create user model instance
+let UserModel = require('../models/user');
+let User = UserModel.userModel; //alias
+
 
 module.exports.displayHomePage = (req, res) => {
+    req.body = {
+        username: 'abc',
+        name: 'abc',
+        password: 'abc',
+        email: 'abc@gmail.com'
+    }
+    // processRegisterPage(req, res);
     res.render('pages/home', { title: 'Express' });
 }
 
 module.exports.displayAboutPage = (req, res) => {
-    res.render('pages/about', { title: 'Express' });
+    res.render('pages/about', { title: 'Express', displayName: req.user ? req.user.name : '' });
 }
 
 module.exports.displayContactPage = (req, res) => {
-    res.render('pages/contact', { title: 'Express' });
+    res.render('pages/contact', { title: 'Express', displayName: req.user ? req.user.name : '' });
 }
 
 module.exports.displayProjectsPage = (req, res) => {
-    res.render('pages/projects', { title: 'Express' });
+    res.render('pages/projects', { title: 'Express', displayName: req.user ? req.user.name : '' });
 }
 
 module.exports.displayServicesPage = (req, res) => {
-    res.render('pages/services', { title: 'Express' });
+    res.render('pages/services', { title: 'Express', displayName: req.user ? req.user.name : '' });
+}
+
+module.exports.displayBussinessPage = (req, res) => {
+
+    return res.render('pages/business_contacts',
+        {
+            data: [],
+            title: 'PatientHomePage',
+            messages: patientRecord.length > 0 ? 'Successful login' : 'No Pre Bussiness record found',
+            displayName: req.user ? req.user.name : ''
+        });
+}
+
+/* GET Login page. */
+module.exports.displayLoginPage = (req, res, next) => {
+    //check if user has already logged in
+    if (!req.user) {
+        return res.render('auth/login',
+            {
+                title: "Login",
+                messages: req.flash('loginmessage'),
+                displayName: req.user ? req.user.name : ''
+            })
+    }
+    else {
+        return res.redirect('/');
+    }
+    // res.render('index', { title: 'Login' });
+}
+/*Process Login Page*/
+module.exports.processLoginPage = (req, res, next) => {
+    passport.authenticate('local',
+        {
+            failureFlash: true
+        },
+        (err, userModel, info) => {
+            //server err?
+            if (err) {
+                return next(err);
+            }
+            //is there a user login error?
+            if (!userModel) {
+                res.locals.displayName = req.user ? req.user.name : '';
+                return res.render('auth/login',
+                    {
+                        title: "Login",
+                        messages: 'Authentication Error: ' + info.message,
+                        displayName: req.user ? req.user.name : ''
+                    });
+            }
+            req.login(userModel, (err) => {
+                //server err?
+                if (err) {
+                    return next(err);
+                }
+                return res.redirect('/home');
+            });
+        })(req, res, next);
+}
+
+
+/*process Logout*/
+module.exports.processLogout = (req, res, next) => {
+    req.logout();
+    return res.redirect('/');
+}
+
+
+
+/* Process Register page */
+processRegisterPage = (req, res, next) => {
+    //instantiate a user object
+    let newUser = new User({
+        username: req.body.username,
+        name: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+    });
+
+    User.register(newUser, req.body.password, (err) => {
+        if (err) {
+            console.log("Error:", err?.message);
+        }
+        else {
+            //if no error exists then registration is successful
+            return passport.authenticate('local')(req, res, () => {
+                return res.redirect('login');
+            });
+            return res.redirect('login');
+        }
+    });
+
 }

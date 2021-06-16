@@ -17,6 +17,13 @@
         <li><a href="/services"><i class="bx bx-server"></i> Services</a></li>
         <li><a href="/contact"><i class="bx bx-envelope"></i> Contact</a></li>
 
+        <%if(currentUser){%>
+          <li><a href="/bussiness"><i class="bx bx-envelope"></i> Business Contact</a></li>
+          <li><a href="/logout"><i class="bx bx-arrow-to-top"></i> Logout</a></li>
+          <% } else { %>
+            <li><a href="/login"><i class="bx bx-arrow-to-bottom"></i> Login</a></li>
+            <% } %>
+
       </ul>
     </nav><!-- .nav-menu -->
     <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>

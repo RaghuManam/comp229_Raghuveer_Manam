@@ -1,0 +1,44 @@
+<%- include('../partials/head')-%>
+
+    <body>
+        <%- include('../partials/header')-%>
+            <main id="main">
+                <!-- ======= Contact Section ======= -->
+                <section id="contact" class="contact">
+                    <div class="container">
+
+                        <div class="section-title">
+                            <h2>Login</h2>
+                        </div>
+
+                        <div class="row" data-aos="fade-in">
+                            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                                <form action="/login" method="post">
+                                    <div class="form-group">
+                                        <label for="name">email</label>
+                                        <input type="text" name="user_email" id="_email" class="form-control"
+                                            placeholder="Email" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Password</label>
+                                        <input type="password" name="user_pass" id="_pass" class="form-control"
+                                            placeholder="Password" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </section><!-- End Contact Section -->
+            </main>
+            <%- include('../partials/footer')-%>
+    </body>
+    <script>
+        window.onload = function () {
+            document.getElementById('contact').classList.add('active');
+        };
+    </script>
+
+    </html>

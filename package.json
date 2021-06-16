@@ -1,10 +1,9 @@
 {
-  "name": "comp229raghuveermanam",
-  "version": "1.0.0",
+  "name": "codeemr",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "serve-dev": "echo '=> Installing node_module and Running app...' && npm install && node server.js",
-    "start": "npm run serve-dev"
+    "start": "node ./server.js"
   },
   "engines": {
     "node": "^14.13.0",
