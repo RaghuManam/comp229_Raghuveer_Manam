@@ -10,29 +10,6 @@ let bussinessModel = mongoose.Schema({
         trim: true,
         required: 'name is required'
     },
-    height: {
-        type: String,
-        default: '',
-        trim: true,
-        required: 'height is required'
-    },
-    weight: {
-        type: String,
-        default: '',
-        trim: true,
-        required: 'weight is required'
-    },
-    temperature: {
-        type: String,
-        default: '',
-        trim: true,
-        required: 'temperature is required'
-    },
-    physical_exam_record: {
-        type: String,
-        default: '',
-        trim: true
-    },
     created: {
         type: Date,
         default: Date.now

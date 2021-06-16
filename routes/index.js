@@ -13,9 +13,6 @@ function requireAuth(req, res, next) {
     next();
 }
 
-/* GET Patient Home page. */
-// router.get('/patientHomePage/:id', requireAuth, indexController.displayPatHomePage);
-
 router.get('/', indexController.displayHomePage);
 
 /* GET home page. */
@@ -46,7 +43,7 @@ router.get('/services', indexController.displayServicesPage);
 
 
 /* GET Bussiness page. */
-router.get('/bussiness', indexController.displayBussinessPage);
+router.get('/bussiness', requireAuth, indexController.displayBussinessPage);
 
 /* Redirect from contact page. */
 router.get('/postcontact', function (req, res) {
