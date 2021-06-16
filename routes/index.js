@@ -42,9 +42,27 @@ router.get('/projects', indexController.displayProjectsPage);
 router.get('/services', indexController.displayServicesPage);
 
 
-/* GET Bussiness page. */
-router.get('/bussiness', requireAuth, indexController.displayBussinessPage);
+/* GET route for displaying the Registration page. */
+router.get('/display_add_business', indexController.displayAddBusinessPage);
 
+/* GET route for processing the registration page. */
+router.post('/add_business', indexController.processAddBusiness);
+
+
+/* GET Business page. */
+router.get('/business', requireAuth, indexController.displayBusinessPage);
+
+/* DELETE services page. */
+router.post('/business/delete/(:id)', requireAuth, indexController.deleteBusiness);
+
+/* Get business edit page. */
+router.get('/business/edit/(:id)', requireAuth, indexController.displayEditBusinessPage);
+/* Post business edit page. */
+router.post('/business/edit/(:id)', requireAuth, indexController.processEditBusiness);
+
+
+
+// requireAuth, 
 /* Redirect from contact page. */
 router.get('/postcontact', function (req, res) {
     return res.redirect('/');

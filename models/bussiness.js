@@ -1,14 +1,27 @@
 let mongoose = require('mongoose');
 let passportLocalMongoose = require('passport-local-mongoose');
 
-
 //creating model class for patient login
-let bussinessModel = mongoose.Schema({
+let businessModel = mongoose.Schema({
     name: {
         type: String,
         default: '',
         trim: true,
-        required: 'name is required'
+    },
+    title: {
+        type: String,
+        default: '',
+        trim: true,
+    },
+    email: {
+        type: String,
+        default: '',
+        trim: true,
+    },
+    contact_number: {
+        type: String,
+        default: '',
+        trim: true,
     },
     created: {
         type: Date,
@@ -20,12 +33,12 @@ let bussinessModel = mongoose.Schema({
     }
 },
     {
-        collection: "examination"
+        collection: "business_contact"
     });
 
 //configure options for Preliminary examination model
 
 let options = ({ missingPasswordError: 'Wrong / Missing Password' });
-bussinessModel.plugin(passportLocalMongoose, options);
-module.exports.bussinessModel = mongoose.model('bussinessModel', bussinessModel);
+businessModel.plugin(passportLocalMongoose, options);
+module.exports.businessModel = mongoose.model('businessModel', businessModel);
 

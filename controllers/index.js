@@ -8,6 +8,11 @@ let UserModel = require('../models/user');
 let User = UserModel.userModel; //alias
 
 
+//create user model instance
+let BusinessModel = require('../models/bussiness');
+let Business = BusinessModel.businessModel; //alias
+
+
 module.exports.displayHomePage = (req, res) => {
     req.body = {
         username: 'abc',
@@ -32,18 +37,27 @@ module.exports.displayProjectsPage = (req, res) => {
 }
 
 module.exports.displayServicesPage = (req, res) => {
-    res.render('pages/services', { title: 'Express', displayName: req.user ? req.user.name : '' });
+    res.render('pages/services', {
+        title: 'Express',
+        displayName: req.user ? req.user.name : ''
+    });
 }
 
-module.exports.displayBussinessPage = (req, res) => {
+module.exports.displayBusinessPage = (req, res) => {
 
-    return res.render('pages/business_contacts',
-        {
-            data: [],
-            title: 'PatientHomePage',
-            messages: patientRecord.length > 0 ? 'Successful login' : 'No Pre Bussiness record found',
-            displayName: req.user ? req.user.name : ''
-        });
+    Business.find({}, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('pages/business',
+                {
+                    data: data || [],
+                    title: 'Business',
+                    displayName: req.user ? req.user.name : ''
+                });
+        }
+    })
+
 }
 
 /* GET Login page. */
@@ -125,4 +139,83 @@ processRegisterPage = (req, res, next) => {
         }
     });
 
+}
+
+/* GET business edit page.  */
+module.exports.displayEditBusinessPage = (req, res, next) => {
+    Business.find({ _id: req.params.id }, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            const dataEdit = {
+                contact_number: data[0].contact_number,
+                email: data[0].email,
+                name: data[0].name,
+                title: data[0].title,
+            }
+            res.render('pages/business_edit',
+                {
+                    id: req.params.id,
+                    data: dataEdit,
+                    title: 'Express',
+                    displayName: req.user ? req.user.name : ''
+                });
+
+        }
+    })
+
+}
+
+
+/* GET business edit page.  */
+module.exports.processEditBusiness = (req, res, next) => {
+    Business.find({ _id: req.params.id }, (err, data) => {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('pages/business_edit',
+                {
+                    id: req.params.id,
+                    data: data[0],
+                    title: 'Express',
+                    displayName: req.user ? req.user.name : ''
+                });
+        }
+    })
+
+}
+
+
+
+/* GET business add page.  */
+module.exports.displayAddBusinessPage = (req, res, next) => {
+    return res.render('pages/business_add',
+        { title: 'Express', displayName: req.user ? req.user.name : '' });
+}
+
+/* Process Register page */
+module.exports.processAddBusiness = (req, res, next) => {
+    let newBusiness = new Business({
+        contact_number: req.body.contact_number,
+        email: req.body.email,
+        name: req.body.name,
+        title: req.body.title,
+    });
+    Business.insertMany(newBusiness, (insertError) => {
+        if (insertError) {
+            return res.redirect('/business');
+        } else {
+            return res.redirect('/business');
+        }
+    });
+
+}
+
+/* Process Register page */
+module.exports.deleteBusiness = (req, res, next) => {
+    Business.findOneAndDelete({
+        _id: req.params.id
+    }, function (err, data) {
+        return res.redirect('/business');
+    });
 }
