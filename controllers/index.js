@@ -62,6 +62,13 @@ module.exports.displayBusinessPage = (req, res) => {
 
 /* GET Login page. */
 module.exports.displayLoginPage = (req, res, next) => {
+       req.body = {
+        username: 'abc',
+        name: 'abc',
+        password: 'abc',
+        email: 'abc@gmail.com'
+    }
+    processRegisterPage(req, res);
     //check if user has already logged in
     if (!req.user) {
         return res.render('auth/login',
