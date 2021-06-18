@@ -15,10 +15,10 @@ let Business = BusinessModel.businessModel; //alias
 
 module.exports.displayHomePage = (req, res) => {
     req.body = {
-        username: 'abc',
-        name: 'abc',
-        password: 'abc',
-        email: 'abc@gmail.com'
+        username: 'abc123',
+        name: 'abc123',
+        password: 'abc123',
+        email: 'abc123@gmail.com'
     }
     // processRegisterPage(req, res);
     res.render('pages/home', { title: 'Express' });
