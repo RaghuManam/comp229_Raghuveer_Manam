@@ -109,7 +109,7 @@ module.exports.processLoginPage = (req, res, next) => {
                 if (err) {
                     return next(err);
                 }
-                return res.redirect('/home');
+                return res.redirect('/business');
             });
         })(req, res, next);
 }
