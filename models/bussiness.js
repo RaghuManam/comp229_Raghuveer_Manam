@@ -16,7 +16,7 @@ let businessModel = mongoose.Schema({
     email: {
         type: String,
         default: '',
-        trim: true,
+        trim: true, ndex: true, unique: true, sparse: true,
     },
     contact_number: {
         type: String,
@@ -36,9 +36,5 @@ let businessModel = mongoose.Schema({
         collection: "business_contact"
     });
 
-//configure options for Preliminary examination model
-
-let options = ({ missingPasswordError: 'Wrong / Missing Password' });
-businessModel.plugin(passportLocalMongoose, options);
 module.exports.businessModel = mongoose.model('businessModel', businessModel);
 

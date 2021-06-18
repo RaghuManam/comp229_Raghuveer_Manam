@@ -206,7 +206,7 @@ module.exports.processAddBusiness = (req, res, next) => {
         name: req.body.name,
         title: req.body.title,
     });
-    Business.insertMany(newBusiness, (insertError) => {
+    newBusiness.save((insertError) => {
         if (insertError) {
             return res.redirect('/business');
         } else {
